@@ -88,7 +88,7 @@ class AudioProcessor:
         global num_chunks
         self.recorded_audio = self.loaded_audio
         prompt_audio = self.loaded_audio.reshape(1, 2, -1)
-        prompt_audio = prompt_audio[:, :, -num_chunks*16000:].cpu().numpy()
+        prompt_audio = prompt_audio[:, :, -num_chunks * SAMPLE_RATE:].cpu().numpy()
         prompt_audio_mono = prompt_audio.mean(axis=1)
         self.prompt_buffer = np.array_split(prompt_audio_mono[0], num_chunks)
         print_colored(f"Initialized prompt buffer with {len(self.prompt_buffer)} chunks", "grey")
